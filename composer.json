@@ -1,6 +1,25 @@
 {
-    "name": "yourvendor/domify-framework",
+    "name": "domify/domify-framework",
     "description": "Domify - A Domain-Driven Design PHP framework (full-featured)",
+    "keywords": [
+        "php",
+        "framework",
+        "ddd",
+        "domain-driven-design",
+        "eloquent",
+        "mvc",
+        "queue",
+        "mail",
+        "cache"
+    ],
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ufuoma Jude Onohwosafe",
+            "email": "judeufuomao@gmail.com"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "symfony/console": "^6.0",
@@ -19,5 +38,6 @@
     },
     "scripts": {
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "stable"
 }
