@@ -1,0 +1,3 @@
+<?php
+namespace Framework\Auth;
+class Auth { private $userModel; public function __construct($userModel){ $this->userModel=$userModel; if(session_status()===PHP_SESSION_NONE) session_start(); } public function attempt(array $cred): bool{ $email=$cred['email']??null; if(!$email) return false; $m=$this->userModel::where('email',$email)->first(); if(!$m) return false; $_SESSION['domify_user_id']=$m->id; return true; } public function user(){ if(empty($_SESSION['domify_user_id'])) return null; return $this->userModel::find($_SESSION['domify_user_id']); } public function logout(){ unset($_SESSION['domify_user_id']); } }

@@ -1,0 +1,4 @@
+<?php
+namespace Framework\Queue;
+use PDO;
+class DatabaseQueue implements Queue { private $pdo; public function __construct($connection){ $this->pdo = $connection->getPdo(); } public function push(string $payload, string $queue='default'){ $stmt=$this->pdo->prepare('INSERT INTO jobs (queue,payload,attempts,reserved_at,available_at) VALUES (:queue,:payload,0,NULL,:available)'); $stmt->execute(['queue'=>$queue,'payload'=>$payload,'available'=>time()]); } public function pop(string $queue='default'){ $this->pdo->beginTransaction(); $stmt=$this->pdo->prepare('SELECT * FROM jobs WHERE queue = :queue AND reserved_at IS NULL ORDER BY id ASC LIMIT 1 FOR UPDATE'); $stmt->execute(['queue'=>$queue]); $job=$stmt->fetch(PDO::FETCH_ASSOC); if(!$job){ $this->pdo->commit(); return null;} $stmt2=$this->pdo->prepare('UPDATE jobs SET reserved_at = :now WHERE id = :id'); $stmt2->execute(['now'=>time(),'id'=>$job['id']]); $this->pdo->commit(); return $job; } }
