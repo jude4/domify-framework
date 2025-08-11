@@ -1,8 +1,8 @@
-# 🐝 Domify Framework
+#  Domify Framework
 
 **Domify** is a modern, Domain-Driven Design PHP framework built for speed, flexibility, and developer happiness.
 
-## ✨ Features
+##  Features
 
 - Domain-Driven Design structure
 - Eloquent ORM
@@ -14,7 +14,7 @@
 - Mail & Cache facades
 - Middleware pipeline
 
-## 🚀 Installation
+##  Installation
 
 ```bash
 composer create-project domify/domify myapp
